@@ -1,0 +1,39 @@
+<div class="product">
+    <app-navbar></app-navbar>
+    
+<div class="filter-panel">
+  <label>
+    Category:
+    <select [(ngModel)]="selectedCategory" (change)="onFilterChange()">
+      <option value="">All</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </label>
+
+  <label>
+    Sort:
+    <select [(ngModel)]="selectedSort" (change)="onFilterChange()">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </label>
+
+  <label>
+    Limit:
+    <input type="number" [(ngModel)]="limit" (change)="onFilterChange()" min="1" max="30"/>
+  </label>
+</div>
+
+<div *ngIf="loading">Loading products...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div class="product-list" *ngIf="!loading && products.length">
+  <div class="product-card" *ngFor="let product of products">
+    <img [src]="product.image" alt="{{ product.title }}" />
+    <h3>{{ product.title }}</h3>
+    <p>Price: ${{ product.price }}</p>
+    <p>Category: {{ product.category }}</p>
+    <p>{{ product.description | slice:0:100 }}...</p>
+    <!-- <button (click)="viewProduct(product.id)">View Details</button> -->
+  </div>
+</div>
