@@ -1,24 +1,230 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-  }
-  
-  .dashboard {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #ffffff;
-    overflow: auto;
-  }
-  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow: auto;
+}
+
+.filter-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-panel label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #555;
+}
+
+.filter-panel input[type="number"],
+.filter-panel select {
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100px;
+}
+
+/* .filter-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.filter-panel label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+} */
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  color: #333;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+.product-card button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background-color: #0056b3;
+}
+
+.add-product-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.add-product-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-product-button:hover {
+  background-color: #218838;
+}
+
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000; /* Above other content */
+}
+
+/* Modal Content */
+.modal-content {
+background-color: #ffffff;
+border-radius: 8px;
+padding: 20px;
+width: 400px; /* Fixed width for the modal */
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+transition: transform 0.3s ease-in-out;
+animation: fadeIn 0.3s; /* Animation effect */
+}
+
+/* Modal Title */
+.modal-content h2 {
+margin-bottom: 15px;
+font-size: 1.5em;
+color: #333; /* Darker title color */
+}
+
+/* Input Fields */
+.modal-content label {
+margin-top: 10px;
+color: #555; /* Label color */
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+width: 100%; /* Full width */
+padding: 10px;
+margin-top: 5px;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 1em;
+transition: border-color 0.3s;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+border-color: #218838; /* Change border color on focus */
+outline: none; /* Remove default outline */
+}
+
+/* Buttons */
+.modal-content button {
+background-color: #218838; /* Primary button color */
+color: white;
+border: none;
+padding: 10px 15px;
+border-radius: 4px;
+margin-top: 15px;
+cursor: pointer;
+transition: background-color 0.3s;
+width: 100%; /* Full width buttons */
+}
+
+.modal-content button:hover {
+background-color: #218838; 
+}
+
+.modal-content button:nth-of-type(2) {
+background-color: #f33838; /* Cancel button color */
+}
+
+.modal-content button:nth-of-type(2):hover {
+background-color: #f82d2d; /* Darker red on hover */
+}
+
+/* Animation */
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: scale(0.9);
+}
+to {
+  opacity: 1;
+  transform: scale(1);
+}
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+.modal-content {
+  width: 90%; /* Full width on small screens */
+  padding: 15px; /* Reduce padding */
+}
+}
