@@ -13,6 +13,11 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserComponent } from './pages/user/user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MyCartComponent } from './pages/my-cart/my-cart.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DetailUserComponent } from './components/detail-user/detail-user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     CartComponent,
     DashboardComponent,
     UserComponent,
-    NavbarComponent
+    NavbarComponent,
+    DetailProductComponent,
+    ProfileComponent,
+    MyCartComponent,
+    DetailUserComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +39,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

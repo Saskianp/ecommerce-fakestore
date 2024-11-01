@@ -1,0 +1,49 @@
+<div class="detail-product">
+    <app-navbar></app-navbar>
+<div class="content">
+<div *ngIf="loading" class="loading">Loading product details...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div *ngIf="product && !loading" class="product-detail-container">
+  <div class="product-detail-card">
+    
+    <!-- Image container -->
+    <div class="product-image-container">
+      <img class="product-image" [src]="product.image" alt="{{ product.title }}" />
+    </div>
+    
+    <!-- Product info in the center -->
+    <div class="product-info">
+      <h1 class="product-title">{{ product.title }}</h1>
+      <p class="product-category">Category: {{ product.category }}</p>
+      <p class="product-price">Price: ${{ product.price }}</p>
+      <p class="product-description">{{ product.description }}</p>
+    </div>
+    
+    <!-- Actions on the right side -->
+    <div class="product-actions">
+      <div class="quantity-control">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" [(ngModel)]="quantity" min="1" />
+      </div>
+      
+      <div class="button-group">
+        <button (click)="addToCart()" class="action-button add-to-cart-button">
+          <i class="material-icons">add_shopping_cart</i>
+          Add to Cart
+        </button>
+        <button (click)="updateProduct()" class="action-button update-cart-button">
+          <i class="material-icons">edit</i>
+          Update in Cart
+        </button>
+        <button (click)="deleteProduct()" class="action-button delete-cart-button">
+          <i class="material-icons">delete</i>
+          Remove from Cart
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+</div>
+</div>

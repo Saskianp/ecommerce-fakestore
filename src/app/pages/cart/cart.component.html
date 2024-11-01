@@ -1,1 +1,56 @@
-<p>cart works!</p>
+<div class="cart">
+    <app-navbar></app-navbar>
+<div class="content">
+<div class="filters">
+  <label>
+    Limit:
+    <input type="number" [(ngModel)]="limit" (change)="onFilterChange()" />
+  </label>
+
+  <label>
+    Sort:
+    <select [(ngModel)]="sort" (change)="onFilterChange()">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </label>
+
+  <label>
+    Start Date:
+    <input type="date" [(ngModel)]="startDate" (change)="onFilterChange()" />
+  </label>
+
+  <label>
+    End Date:
+    <input type="date" [(ngModel)]="endDate" (change)="onFilterChange()" />
+  </label>
+</div>
+
+<div *ngIf="loading" class="loading">Loading cart items...</div>
+<div *ngIf="!loading && errorMessage" class="error">{{ errorMessage }}</div>
+
+<div *ngIf="!loading && cartItems.length === 0" class="empty-cart">
+  Your cart is empty.
+</div>
+
+<div *ngIf="!loading && cartItems.length > 0" class="cart-container">
+  <div *ngFor="let cart of cartItems" class="cart-item-card">
+    <div class="cart-item-details">
+      <h3>Cart ID: {{ cart.id }}</h3>
+      <p>User ID: {{ cart.userId }}</p>
+      <p>Cart Date: {{ cart.date | date }}</p>
+      <div *ngFor="let product of cart.products">
+        <div class="product-details">
+          <p><strong>{{ product.details.title }}</strong></p>
+          <img [src]="product.details.image" alt="{{ product.details.title }}" />
+          <p>Quantity: {{ product.quantity }}</p>
+          <p>Price: ${{ product.details.price }}</p>
+          <p>Total: ${{ product.quantity * product.details.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>

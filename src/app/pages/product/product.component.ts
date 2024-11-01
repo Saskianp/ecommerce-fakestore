@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -7,18 +8,28 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-[x: string]: any;
   products: any[] = [];
   categories: string[] = [];
   selectedCategory: string = '';
   selectedSort: 'asc' | 'desc' = 'asc';
   limit: number = 10;
 
+  isAddProductModalOpen: boolean = false;
+
+  newProduct = {
+    title: '',
+    price: null,
+    description: '',
+    image: '',
+    category: ''
+  };
+
   loading: boolean = true;
   errorMessage: string = '';
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -67,4 +78,37 @@ export class ProductComponent {
   onFilterChange(): void {
     this.fetchProducts();
   }
+
+  viewProduct(id: number): void {
+    this.router.navigate(['/product', id]);
+  }
+
+  openAddProductModal(): void {
+    this.isAddProductModalOpen = true;
+  }
+
+  closeAddProductModal(): void {
+    this.isAddProductModalOpen = false;
+  }
+  
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.newProduct.image = `https://fakestoreapi.com/img/${file.name}`;
+    }
+  }
+
+  addProduct(): void {
+    this.apiService.addProduct(this.newProduct).subscribe({
+      next: (data) => {
+        this.products.push(data);
+        this.closeAddProductModal();
+      },
+      error: (err) => {
+        console.error('Failed to add product', err);
+      }
+    });
+  }
+
 }

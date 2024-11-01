@@ -37,6 +37,7 @@ export class ApiService {
     return !!localStorage.getItem('token'); 
   }
 
+  //Product
   getAllProducts(limit?: number, sort?: 'asc' | 'desc'): Observable<any[]> {
     let params = new HttpParams();
     if (limit) params = params.append('limit', limit.toString());
@@ -66,14 +67,92 @@ export class ApiService {
   }
 
   addProduct(product: any): Observable<any> {
-    return this.http.post<any>(this.apiUrlProduct, product);
+    return this.http.post<any>(this.apiUrlProduct, {
+      title: product.title,
+      price: product.price,
+      description: product.description,
+      image: product.image, 
+      category: product.category
+    });
   }
 
   updateProduct(id: number, product: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlProduct}/${id}`, product);
+    return this.http.patch<any>(`${this.apiUrlProduct}/${id}`, product);
   }
 
   deleteProduct(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlProduct}/${id}`);
   }
+
+  //Cart
+  getAllCart(): Observable<any> {
+    return this.http.get<any>(this.apiUrlCart);
+  }
+
+  addToCart(productId: number, quantity: number = 1): Observable<any> {
+    return this.http.post<any>(this.apiUrlCart, {
+      userId: 1,
+      date: new Date(),
+      products: [{ productId, quantity }]
+    });
+  }
+
+  getFilteredCarts(
+    limit?: number,
+    sort?: 'asc' | 'desc',
+    startDate?: string,
+    endDate?: string
+  ): Observable<any[]> {
+    let params = new HttpParams();
+
+    if (limit) params = params.append('limit', limit.toString());
+    if (sort) params = params.append('sort', sort);
+    if (startDate && endDate) {
+      params = params.append('startdate', startDate);
+      params = params.append('enddate', endDate);
+    }
+
+    return this.http.get<any[]>(this.apiUrlCart, { params });
+  }
+
+  getCartById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlCart}/${id}`);
+  }
+
+  getCartByUser(idUser: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlCart}/user/${idUser}`);
+  }
+
+  updateCartItem(itemId: number, quantity: number): Observable<any> {
+    return this.http.put(`${this.apiUrlCart}/${itemId}`, { quantity });
+  }
+  
+  deleteCartItem(itemId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrlCart}/${itemId}`);
+  }  
+
+  //User
+  getUsers(limit?: number, sort?: 'asc' | 'desc'): Observable<any[]> {
+    let params = new HttpParams();
+    if (limit) params = params.append('limit', limit.toString());
+    if (sort) params = params.append('sort', sort);
+    return this.http.get<any[]>(this.apiUrlUser, { params });
+  }
+
+  getUserById(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUser}/${userId}`);
+  }
+
+  addUser(userData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrlUser, userData);
+  }
+
+  updateUser(userId: number, userData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrlUser}/${userId}`, userData);
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrlUser}/${userId}`);
+  }
+  
 }

@@ -1,0 +1,38 @@
+.user-detail {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-detail h2 {
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .user-detail p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 5px 0;
+  }
+  
+  .address {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .address h3 {
+    color: #666;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .user-detail p strong {
+    color: #333;
+  }
+  

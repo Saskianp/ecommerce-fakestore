@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow: auto;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filters label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #555;
+}
+
+.filters input,
+.filters select {
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100px;
+}
+
+.cart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cart-item-card {
+  display: flex;
+  width: calc(33.333% - 20px); /* 3 items in a row with gap */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  align-items: center;
+  background-color: #fff; /* Added background color for card */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.cart-item-card:hover {
+  transform: scale(1.02);
+}
+
+.cart-item-image {
+  width: 70px; /* Adjusted width for image */
+  height: 70px; /* Adjusted height for image */
+  border-radius: 8px;
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+.cart-item-details {
+  flex-grow: 1; /* Allow this to grow and fill space */
+  padding: 0 15px;
+}
+
+.product-details {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.product-details img {
+  width: 50px; /* Image size for product details */
+  height: 50px; /* Image size for product details */
+  border-radius: 4px;
+}
+
+.cart-item-details h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+.cart-item-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-btn {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #ff4d4d; /* Darker red on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cart-item-card {
+    width: calc(50% - 20px); /* 2 items in a row on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-item-card {
+    width: 100%; /* 1 item in a row on small screens */
+  }
+}

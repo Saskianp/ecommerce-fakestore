@@ -1,1 +1,70 @@
-<p>user works!</p>
+<div class="user">
+  <app-navbar></app-navbar>
+  <div class="content">
+    <div class="filters">
+      <label>
+        Limit:
+        <input type="number" [(ngModel)]="limit" (input)="onFilterChange()" min="1" />
+      </label>
+      <label>
+        Sort:
+        <select [(ngModel)]="sort" (change)="onFilterChange()">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </label>
+
+      <div class="modal-actions">
+        <button type="button" class="confirm-button" (click)="openAddUserModal()">Add User</button>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="loading">Loading users...</div>
+    <div *ngIf="!loading && errorMessage" class="error">{{ errorMessage }}</div>
+    <div *ngIf="!loading && users.length === 0" class="empty">No users found.</div>
+
+    <div *ngIf="!loading && users.length > 0" class="user-list">
+      <div *ngFor="let user of users" class="user-card" (click)="viewUserDetail(user.id)">
+        <h3>{{ user.name.firstname }} {{ user.name.lastname }}</h3>
+        <p>Email: {{ user.email }}</p>
+        <p>Phone: {{ user.phone }}</p>
+        <p>Address: {{ user.address.street }}, {{ user.address.city }}, {{ user.address.zipcode }}</p>
+
+        <button (click)="openUpdateUserModal(user)" class="update-button">Update</button>
+        <button (click)="deleteUser(user.id)" class="delete-button">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isModalOpen" class="modal-overlay">
+    <div class="modal-content">
+      <h2>{{ isEditMode ? 'Update User' : 'Add User' }}</h2>
+      <form (submit)="onSubmit()">
+        <label>Username:</label>
+        <input [(ngModel)]="userForm.username" name="username" required />
+
+        <label>Email:</label>
+        <input [(ngModel)]="userForm.email" name="email" type="email" required />
+
+        <label>Phone:</label>
+        <input [(ngModel)]="userForm.phone" name="phone" type="tel" required />
+
+        <label>Firstname:</label>
+        <input [(ngModel)]="userForm.name.firstname" name="firstname" required />
+
+        <label>Lastname:</label>
+        <input [(ngModel)]="userForm.name.lastname" name="lastname" required />
+
+        <label>Address:</label>
+        <input [(ngModel)]="userForm.address.street" name="street" placeholder="Street" required />
+        <input [(ngModel)]="userForm.address.city" name="city" placeholder="City" required />
+        <input [(ngModel)]="userForm.address.zipcode" name="zipcode" placeholder="Zipcode" required />
+
+        <div class="modal-actions">
+          <button type="button" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="confirm-button">{{ isEditMode ? 'Update' : 'Add' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

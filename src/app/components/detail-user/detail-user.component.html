@@ -1,0 +1,15 @@
+<div class="user-detail">
+    <h2>{{ userDetail.name.firstname }} {{ userDetail.name.lastname }}</h2>
+    <p><strong>Username:</strong> {{ userDetail.username }}</p>
+    <p><strong>Email:</strong> {{ userDetail.email }}</p>
+    <p><strong>Phone:</strong> {{ userDetail.phone }}</p>
+  
+    <div class="address">
+      <h3>Address</h3>
+      <p><strong>Street:</strong> {{ userDetail.address.street }} {{ userDetail.address.number }}</p>
+      <p><strong>City:</strong> {{ userDetail.address.city }}</p>
+      <p><strong>Zip Code:</strong> {{ userDetail.address.zipcode }}</p>
+      <p><strong>Geo Location:</strong> Lat: {{ userDetail.address.geolocation.lat }}, Long: {{ userDetail.address.geolocation.long }}</p>
+    </div>
+  </div>
+  
